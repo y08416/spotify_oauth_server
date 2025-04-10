@@ -6,6 +6,8 @@ export default function handler(req, res) {
       "playlist-modify-private"
     ];
   
+    console.log("🧪 redirect_uri from env:", redirect_uri);
+  
     const query = new URLSearchParams({
       response_type: "code",
       client_id,
