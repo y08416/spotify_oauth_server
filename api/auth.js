@@ -6,7 +6,9 @@ export default function handler(req, res) {
       "playlist-modify-private"
     ];
   
-    console.log("🧪 redirect_uri from env:", redirect_uri);
+    // 🔍 ここでログ出力
+    console.log("🧪 SPOTIFY_CLIENT_ID:", client_id);
+    console.log("🧪 SPOTIFY_REDIRECT_URI:", redirect_uri);
   
     const query = new URLSearchParams({
       response_type: "code",
