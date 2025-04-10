@@ -18,5 +18,22 @@ export default async function handler(req, res) {
     });
   
     const data = await tokenRes.json();
-    res.status(200).json(data); // ← access_token を拡張に返す
+  
+    const accessToken = data.access_token;
+  
+    // ✅ popup.js に postMessage で token を送る HTML を返す
+    res.setHeader("Content-Type", "text/html");
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+        <head><title>認証成功</title></head>
+        <body>
+          <script>
+            window.opener?.postMessage({ type: 'SPOTIFY_TOKEN', token: '${accessToken}' }, '*');
+            window.close();
+          </script>
+          <p>✅ Spotifyログイン成功！このウィンドウは自動で閉じます。</p>
+        </body>
+      </html>
+    `);
   }
